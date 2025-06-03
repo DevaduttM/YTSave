@@ -19,6 +19,12 @@ class HomeScreen extends StatelessWidget {
                     end: Alignment.bottomCenter,
                   ),
                   borderRadius: BorderRadius.all(Radius.circular(30)),
+                  boxShadow: [BoxShadow(
+                    color: Colors.black,
+                    blurRadius: 7.9,
+                    spreadRadius: 5,
+                    offset: Offset(0, 4)
+                  )]
                 ),
                 height: MediaQuery.of(context).size.height * 0.27,
                 width: MediaQuery.of(context).size.width,
@@ -69,6 +75,7 @@ class HomeScreen extends StatelessWidget {
                           children: [
                             UiHelper.CustomTextField(
                               controller: SearchController(),
+                              context: context
                             ),
                           ],
                         ),
@@ -88,10 +95,10 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    UiHelper.VideoCard(context: context, name: "Video 1", channel: "Channel 1"),
-                    UiHelper.VideoCard(context: context, name: "Video 1", channel: "Channel 1"),
-                    UiHelper.VideoCard(context: context, name: "Video 1", channel: "Channel 1"),
-                    UiHelper.VideoCard(context: context, name: "Video 1", channel: "Channel 1"),
+                    UiHelper.VideoCard(context: context, name: "Video 1", channel: "Channel 1", home: true),
+                    UiHelper.VideoCard(context: context, name: "Video 1", channel: "Channel 1", home: true),
+                    UiHelper.VideoCard(context: context, name: "Video 1", channel: "Channel 1", home: true),
+                    UiHelper.VideoCard(context: context, name: "Video 1", channel: "Channel 1", home: true),
                   ],
                 ),
               ),
