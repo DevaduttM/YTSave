@@ -522,8 +522,43 @@ class UiHelper {
 
                           if (shouldDelete == true) {
                             final isarService = IsarService();
-                            await isarService.deleteVideoWithFile(id);
-                            onDelete();
+                            try {
+                              await isarService.deleteVideoWithFile(id);
+
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(5)
+                                  ),
+                                  content: UiHelper.CustomText(
+                                    text: "Video Deleted Successfully",
+                                    color: Colors.white70,
+                                    fontsize: 12,
+                                  ),
+                                  backgroundColor: Color(0xFF4B4B4B),
+                                  behavior: SnackBarBehavior.floating,
+                                  duration: Duration(seconds: 2),
+                                ),
+                              );
+
+                              onDelete();
+                            } catch (e) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5)
+                                  ),
+                                  content: UiHelper.CustomText(
+                                    text: "Error! Could not delete file",
+                                    color: Colors.white70,
+                                    fontsize: 12,
+                                  ),
+                                  backgroundColor: Color(0xFF4B4B4B),
+                                  behavior: SnackBarBehavior.floating,
+                                  duration: Duration(seconds: 2),
+                                ),
+                              );
+                            }
                           }
                         },
                         child: UiHelper.CustomImage(img: "DeleteIcon.png"),
