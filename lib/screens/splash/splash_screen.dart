@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:yt_save/domain/appcolors.dart';
-import 'package:yt_save/screens/home/homescreen.dart';
+import 'package:yt_save/screens/home/home_screen.dart';
 import 'package:yt_save/widgets/uihelper.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -25,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => HomeScreen()),
+        MaterialPageRoute(builder: (_) => HomeScreen(key: UniqueKey(),)),
       );
     });
   }

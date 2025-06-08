@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:yt_save/screens/home/homescreen.dart';
-import 'package:yt_save/screens/splash/splashscreen.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:yt_save/screens/splash/splash_screen.dart';
+
+final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
 
 void main() {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      navigatorObservers: [routeObserver],
       title: 'YT Save',
       theme: ThemeData(
 
