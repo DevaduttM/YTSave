@@ -68,12 +68,13 @@ class DownloadService {
       String fileName = "";
 
       if (streamInfo is AudioOnlyStreamInfo) {
-        fileName = "$safeTitle-audio.${streamInfo.container.name}";
+        fileName = "$safeTitle-audio.mp3";
+        final tempAudioFile = File("${dir.path}/temp_audio.webm");
         filePath = "${dir.path}/$fileName";
 
         final stream = yt.videos.streams.get(streamInfo);
         final file = File(filePath);
-        final fileStream = file.openWrite();
+        final fileStream = tempAudioFile.openWrite();
 
         int totalBytes = streamInfo.size.totalBytes;
         int bytesWritten = 0;
@@ -87,6 +88,25 @@ class DownloadService {
         }
         await fileStream.flush();
         await fileStream.close();
+
+        print("Converting to MP3");
+
+        if(onProgress != null) onProgress(2.5);
+        try{
+          await FFmpegKit.execute(
+              '-i "${tempAudioFile.path}" -vn -c:a libmp3lame -b:a 320k "${file.path}"'
+          );
+          print("Conversion complete");
+          if(onProgress != null) onProgress(2);
+        }
+        catch (e) {
+          print("Conversion Error $e");
+        }
+
+        if (await tempAudioFile.exists()) {
+          await tempAudioFile.delete();
+        }
+
       }
 
       else if (streamInfo is MergedStream) {
