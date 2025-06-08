@@ -49,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> with RouteAware {
     final videos = await _isarService.getAllVideos();
     await Future.delayed(Duration(seconds: 2));
     setState(() {
-      _videos = videos;
+      _videos = videos.reversed.toList();
       _isLoading = false;
     });
   }

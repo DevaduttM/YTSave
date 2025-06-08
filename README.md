@@ -1,16 +1,62 @@
-# yt_save
+markdown
+# 📥 YT Save
 
-A new Flutter project.
+YT Save is a Flutter-based mobile app that allows users to search for YouTube videos, view available download streams (audio/video), and download them for offline viewing — all within a sleek and minimal UI.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 🌟 App Overview
 
-A few resources to get you started if this is your first Flutter project:
+- 🔍 **Search YouTube videos** by title or keywords.
+- 🎞️ **Display thumbnails**, titles, channels, and duration.
+- 📥 **Download video/audio streams** with resolution options.
+- 💾 **Store metadata** and downloaded files locally using Isar database.
+- 🎧 **View downloaded videos** in a styled Home screen.
+- 🧭 Clean UI/UX with custom components and Riverpod for state management.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🚀 How to Run the App
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/your-username/yt_save.git
+cd yt_save
+```
+
+### 2. Install Dependencies
+
+```bash
+flutter pub get
+```
+
+### 3. Run the App
+
+```bash
+flutter run
+```
+
+---
+
+## 🧠 Assumptions and Limitations
+
+- 🧩 **YouTube API is not used.** The app uses `youtube_explode_dart` to parse public YouTube data, which may break if YouTube changes its structure.
+- 📶 Requires a **stable internet connection** to search and fetch streams.
+- 🧹 Downloaded video/audio files are stored locally but not auto-cleaned.
+- ⚠️ **Downloading YouTube videos may violate YouTube's Terms of Service** — this app is for educational and personal offline use only.
+- ⏯️ Downloads **do not run in the background** — closing or minimizing the app stops progress.
+- 🔍 **Search input is non-debounced** and does not cache results.
+
+---
+
+## 📸 Screenshots
+
+markdown
+![Home Screen](screenshots/home.png)
+![Download Options](screenshots/download_options.png)
+
+
+---
+
+

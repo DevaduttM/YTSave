@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yt_save/screens/splash/splash_screen.dart';
+import 'package:yt_save/widgets/network_aware_widget.dart';
 
 final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
 
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
 
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: SplashScreen()
+      home: NetworkAwareWidget(child: SplashScreen())
     );
   }
 }
