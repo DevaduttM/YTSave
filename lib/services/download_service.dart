@@ -191,6 +191,7 @@ class DownloadService {
       yt.close();
     }
     catch (e) {
+      if(onProgress != null) onProgress(-1);
       print("Download Unsuccessful, $e");
     }
   }
