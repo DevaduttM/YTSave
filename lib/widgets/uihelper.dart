@@ -422,7 +422,8 @@ class UiHelper {
     required String url,
     required String filePath,
     required int seconds,
-    required int id
+    required int id,
+    required VoidCallback onDelete
   }) {
     print(filePath);
 
@@ -500,9 +501,30 @@ class UiHelper {
                       SizedBox(width: 5,),
                       GestureDetector(
                         onTap: () async {
-                          final isarService = IsarService();
-                          await isarService.deleteVideoWithFile(id);
+                          final shouldDelete = await showDialog<bool>(
+                            context: context,
+                            builder: (ctx) => AlertDialog(
+                              backgroundColor: AppColors.background2,
+                              title: UiHelper.CustomText(text: "Delete Video", color: Colors.white, fontsize: 20),
+                              content: UiHelper.CustomText(text: "Are you sure you want to delete this video?", color: Colors.white70, fontsize: 12),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.of(ctx).pop(false),
+                                  child: UiHelper.CustomText(text: "Cancel", color: Colors.white54, fontsize: 14)
+                                ),
+                                TextButton(
+                                  onPressed: () => Navigator.of(ctx).pop(true),
+                                  child: UiHelper.CustomText(text: "Ok", color: Colors.red, fontsize: 14)
+                                ),
+                              ],
+                            ),
+                          );
 
+                          if (shouldDelete == true) {
+                            final isarService = IsarService();
+                            await isarService.deleteVideoWithFile(id);
+                            onDelete();
+                          }
                         },
                         child: UiHelper.CustomImage(img: "DeleteIcon.png"),
                       )

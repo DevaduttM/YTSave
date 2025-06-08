@@ -188,7 +188,13 @@ class _HomeScreenState extends State<HomeScreen> with RouteAware {
                                 home: true,
                                 filePath: video.filepath,
                                 seconds: video.durationInSeconds,
-                                id: video.id
+                                id: video.id,
+                                  onDelete: () async {
+                                    final updatedVideos = await _isarService.getAllVideos();
+                                    setState(() {
+                                      _videos = updatedVideos;
+                                    });
+                                  }
                               );
                             },
                           ),
