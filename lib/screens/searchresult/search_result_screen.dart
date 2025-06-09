@@ -155,9 +155,19 @@ class _SearchResultScreenState extends ConsumerState<SearchResultScreen> {
 
 
               error: (err, st) => Center(
-                child: Text(
-                  'Error: $err',
-                  style: const TextStyle(color: Colors.red),
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.error_outline_rounded,
+                        color: Colors.red,
+                        size: 70,),
+                      SizedBox(height: 10,),
+                      UiHelper.CustomText(text: "An Error Occurred! Try Again", color: Colors.red, fontsize: 18),
+                      SizedBox(height: 5,),
+                      UiHelper.CustomText(text: "Check your internet", color: Colors.white54, fontsize: 14)
+                    ],
+                  ),
                 ),
               ),
             ),

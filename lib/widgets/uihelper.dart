@@ -664,11 +664,11 @@ class DownloadStreamsSheetState extends State<DownloadStreamsSheet> {
 
   @override
   Widget build(BuildContext context) {
-    double? isDownloading = _downloadProgress.values.isNotEmpty
-        ? _downloadProgress.values.first
-        : null;
+    // double? isDownloading = _downloadProgress.values.isNotEmpty
+    //     ? _downloadProgress.values.first
+    //     : null;
 
-    // double isDownloading = 2.5;
+    double isDownloading = -1;
 
     if (isDownloading == null) {
       return Container(
@@ -885,7 +885,7 @@ class DownloadStreamsSheetState extends State<DownloadStreamsSheet> {
           )
       );
     }
-    else if(isDownloading <= 1.0) {
+    else if(isDownloading <= 1.0 && isDownloading >= 0.0) {
       return Container(
           padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
           height: MediaQuery.of(context).size.height * 0.5,
@@ -978,7 +978,23 @@ class DownloadStreamsSheetState extends State<DownloadStreamsSheet> {
                   style: TextStyle(color: Colors.white, fontSize: 16),
                 ),
                 SizedBox(height: 15),
-
+                Divider(color: Color(0xFF5C5C5C)),
+                SizedBox(
+                  height: 300,
+                  child:
+                    Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.error_outline_rounded,
+                          color: Colors.red,
+                          size: 70,),
+                          SizedBox(height: 10,),
+                          UiHelper.CustomText(text: "An Error Occurred! Try Again", color: Colors.red, fontsize: 18)
+                        ],
+                      ),
+                    ),
+                )
               ]
           )
       );
