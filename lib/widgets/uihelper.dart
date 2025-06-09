@@ -675,7 +675,7 @@ class DownloadStreamsSheetState extends State<DownloadStreamsSheet> {
         ? _downloadProgress.values.first
         : null;
 
-    // double isDownloading = -1;
+    // double isDownloading = 2.0;
 
     if (isDownloading == null) {
       return Container(
@@ -864,6 +864,8 @@ class DownloadStreamsSheetState extends State<DownloadStreamsSheet> {
                   child: Column(
                     children: [
                       Lottie.asset("assets/images/Tick_Animation.json", width: 250, height: 250, repeat: false, animate: true),
+                      UiHelper.CustomText(text: "Download Complete", color: Colors.white, fontsize: 16),
+                      SizedBox(height: 10,),
                       _showButton ?
                       GestureDetector(
                         onTap: () {
