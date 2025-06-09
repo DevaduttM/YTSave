@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:yt_save/screens/home/home_screen.dart';
 import 'package:yt_save/screens/splash/splash_screen.dart';
 import 'package:yt_save/widgets/network_aware_widget.dart';
 
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
 
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: NetworkAwareWidget(child: SplashScreen())
+      home: NetworkAwareWidget(child: HomeScreen())
     );
   }
 }
