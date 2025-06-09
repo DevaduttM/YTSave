@@ -10,7 +10,9 @@ import 'package:yt_save/services/download_service.dart';
 import 'package:yt_save/services/isar_service.dart';
 import 'package:yt_save/widgets/liquid_loading.dart';
 import 'package:yt_save/widgets/youtube_player.dart';
-import 'package:open_file/open_file.dart';
+// import 'package:open_file/open_file.dart';
+import 'package:open_filex/open_filex.dart';
+import 'package:path/path.dart' as p;
 
 
 import '../screens/searchresult/search_result_screen.dart';
@@ -242,173 +244,173 @@ class UiHelper {
     final downloadService = DownloadService();
     final seconds = video.duration?.inSeconds ?? 0;
 
-    return Container(
-      height: 120,
-      width: MediaQuery.of(context).size.width * 0.9,
-      margin: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: AppColors.background5,
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          BoxShadow(
-            color: Color(0x40000000),
-            blurRadius: 6.2,
-            offset: Offset(1, 2),
+    return GestureDetector(
+      onTap: () async {
+        await Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => YoutubePlayerPage(videoUrl: url, name:name, channel: channel, video: video,),
           ),
-        ],
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          GestureDetector(
-            onTap: () async {
-              await Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => YoutubePlayerPage(videoUrl: url, name:name, channel: channel, video: video,),
-                ),
-              );
-            },
-            child: Container(
-              height: 107,
-              width: (MediaQuery.of(context).size.width * 0.95) / 2.35,
-              decoration: BoxDecoration(
-                color: Color(0xFF535353),
-                borderRadius: BorderRadius.circular(5),
-              ),
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(5),
-                    child: Image.network(imageUrl,
-                      fit: BoxFit.fitWidth,
-                      height: 107,
-                      width: (MediaQuery.of(context).size.width + 0.95) / 2.35,),
-                  ),
-                  // UiHelper.CustomImage(img: "SplashLogo.png"),
-                  UiHelper.CustomImage(img: "Play.png"),
-                  Positioned(
-                    bottom: 5,
-                      right: 5,
-                      child: Container(
-                        padding: EdgeInsets.fromLTRB(5, 1, 5, 1),
-                        height: 15,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(2),
-                          color: Color(0xBF000000),
-                        ),
-                          child: UiHelper.CustomText(text: "${seconds~/60}:${(seconds % 60).toString().padLeft(2, '0')}", color: Colors.white, fontsize: 10),
-                      )
-                  )
-                ],
-              ),
+        );
+      },
+      child: Container(
+        height: 120,
+        width: MediaQuery.of(context).size.width * 0.9,
+        margin: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: AppColors.background5,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+              color: Color(0x40000000),
+              blurRadius: 6.2,
+              offset: Offset(1, 2),
             ),
-          ),
-          SizedBox(
-            width: (MediaQuery.of(context).size.width * 0.95) / 1.9,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(15.0, 0, 15.0, 0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Expanded(child: UiHelper.CustomText(
-                        text: name,
-                        color: Colors.white,
-                        fontfamily: "bold",
-                        fontsize: 12,
-                      ),),
-                      home
-                          ? UiHelper.CustomText(
-                              text: "MP4",
-                              color: Color(0xFFDBDF60),
-                              fontfamily: "bold",
-                              fontsize: 10,
-                            )
-                          : SizedBox.shrink(),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      UiHelper.CustomText(
-                        text: channel,
-                        color: Colors.white,
-                        fontsize: 10,
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 20),
-                  home
-                      ? SizedBox(
-                          width:
-                              (MediaQuery.of(context).size.width * 0.95) / 1.9,
-                          height: 30,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              print("hi");
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Color(0XFFDBDF5B),
-                              foregroundColor: Colors.black,
-                              padding: const EdgeInsets.all(4.0),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                            ),
-                            child: UiHelper.CustomText(
-                              text: "Go to location",
-                              color: Colors.black,
-                              fontsize: 10,
-                            ),
+          ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+                height: 107,
+                width: (MediaQuery.of(context).size.width * 0.95) / 2.35,
+                decoration: BoxDecoration(
+                  color: Color(0xFF535353),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(5),
+                      child: Image.network(imageUrl,
+                        fit: BoxFit.fitWidth,
+                        height: 107,
+                        width: (MediaQuery.of(context).size.width + 0.95) / 2.35,),
+                    ),
+                    // UiHelper.CustomImage(img: "SplashLogo.png"),
+                    UiHelper.CustomImage(img: "Play.png"),
+                    Positioned(
+                        bottom: 5,
+                        right: 5,
+                        child: Container(
+                          padding: EdgeInsets.fromLTRB(5, 1, 5, 1),
+                          height: 15,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(2),
+                            color: Color(0xBF000000),
                           ),
+                          child: UiHelper.CustomText(text: "${seconds~/60}:${(seconds % 60).toString().padLeft(2, '0')}", color: Colors.white, fontsize: 10),
                         )
-                      : SizedBox(
-                          width:
-                              (MediaQuery.of(context).size.width * 0.95) / 1.9,
-                          height: 30,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              showModalBottomSheet(
-                                context: context,
-                                isScrollControlled: true,
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-                                ),
-                                builder: (context) {
-                                  return DownloadStreamsSheet(
-                                    video: video,
-                                    url: url,
-                                    downloadService: downloadService,
-                                  );
-                                },
+                    )
+                  ],
+                ),
+              ),
+            SizedBox(
+              width: (MediaQuery.of(context).size.width * 0.95) / 1.9,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(15.0, 0, 15.0, 0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(child: UiHelper.CustomText(
+                          text: name,
+                          color: Colors.white,
+                          fontfamily: "bold",
+                          fontsize: 12,
+                        ),),
+                        home
+                            ? UiHelper.CustomText(
+                          text: "MP4",
+                          color: Color(0xFFDBDF60),
+                          fontfamily: "bold",
+                          fontsize: 10,
+                        )
+                            : SizedBox.shrink(),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        UiHelper.CustomText(
+                          text: channel,
+                          color: Colors.white,
+                          fontsize: 10,
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 20),
+                    home
+                        ? SizedBox(
+                      width:
+                      (MediaQuery.of(context).size.width * 0.95) / 1.9,
+                      height: 30,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          print("hi");
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0XFFDBDF5B),
+                          foregroundColor: Colors.black,
+                          padding: const EdgeInsets.all(4.0),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        ),
+                        child: UiHelper.CustomText(
+                          text: "Go to location",
+                          color: Colors.black,
+                          fontsize: 10,
+                        ),
+                      ),
+                    )
+                        : SizedBox(
+                      width:
+                      (MediaQuery.of(context).size.width * 0.95) / 1.9,
+                      height: 30,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          showModalBottomSheet(
+                            context: context,
+                            isScrollControlled: true,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                            ),
+                            builder: (context) {
+                              return DownloadStreamsSheet(
+                                video: video,
+                                url: url,
+                                downloadService: downloadService,
                               );
                             },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Color(0XFFDBDF5B),
-                              foregroundColor: Colors.black,
-                              padding: const EdgeInsets.all(4.0),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                            ),
-                            child: UiHelper.CustomText(
-                              text: "Download",
-                              color: Colors.black,
-                              fontsize: 10,
-                            ),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0XFFDBDF5B),
+                          foregroundColor: Colors.black,
+                          padding: const EdgeInsets.all(4.0),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
                           ),
                         ),
-                ],
+                        child: UiHelper.CustomText(
+                          text: "Download",
+                          color: Colors.black,
+                          fontsize: 10,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -425,28 +427,31 @@ class UiHelper {
     required int id,
     required VoidCallback onDelete
   }) {
-    print(filePath);
 
-    return Container(
-      height: 120,
-      width: MediaQuery.of(context).size.width * 0.9,
-      margin: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: AppColors.background5,
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          BoxShadow(
-            color: Color(0x40000000),
-            blurRadius: 6.2,
-            offset: Offset(1, 2),
-          ),
-        ],
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-           Container(
+    return GestureDetector(
+      onTap: () {
+        OpenFilex.open(filePath);
+      },
+      child: Container(
+        height: 120,
+        width: MediaQuery.of(context).size.width * 0.9,
+        margin: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: AppColors.background5,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+              color: Color(0x40000000),
+              blurRadius: 6.2,
+              offset: Offset(1, 2),
+            ),
+          ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
               height: 107,
               width: (MediaQuery.of(context).size.width * 0.95) / 2.35,
               decoration: BoxDecoration(
@@ -481,138 +486,140 @@ class UiHelper {
                 ],
               ),
             ),
-          SizedBox(
-            width: (MediaQuery.of(context).size.width * 0.95) / 1.9,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(15.0, 0, 15.0, 0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(child: UiHelper.CustomText(
-                        text: name,
-                        color: Colors.white,
-                        fontfamily: "bold",
-                        fontsize: 12,
-                      ),),
-                      SizedBox(width: 5,),
-                      GestureDetector(
-                        onTap: () async {
-                          final shouldDelete = await showDialog<bool>(
-                            context: context,
-                            builder: (ctx) => AlertDialog(
-                              backgroundColor: AppColors.background2,
-                              title: UiHelper.CustomText(text: "Delete Video", color: Colors.white, fontsize: 20),
-                              content: UiHelper.CustomText(text: "Are you sure you want to delete this video?", color: Colors.white70, fontsize: 12),
-                              actions: [
-                                TextButton(
-                                  onPressed: () => Navigator.of(ctx).pop(false),
-                                  child: UiHelper.CustomText(text: "Cancel", color: Colors.white54, fontsize: 14)
-                                ),
-                                TextButton(
-                                  onPressed: () => Navigator.of(ctx).pop(true),
-                                  child: UiHelper.CustomText(text: "Ok", color: Colors.red, fontsize: 14)
-                                ),
-                              ],
-                            ),
-                          );
+            SizedBox(
+              width: (MediaQuery.of(context).size.width * 0.95) / 1.9,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(15.0, 0, 15.0, 0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(child: UiHelper.CustomText(
+                          text: name,
+                          color: Colors.white,
+                          fontfamily: "bold",
+                          fontsize: 12,
+                        ),),
+                        SizedBox(width: 5,),
+                        GestureDetector(
+                          onTap: () async {
+                            final shouldDelete = await showDialog<bool>(
+                              context: context,
+                              builder: (ctx) => AlertDialog(
+                                backgroundColor: AppColors.background2,
+                                title: UiHelper.CustomText(text: "Delete Video", color: Colors.white, fontsize: 20),
+                                content: UiHelper.CustomText(text: "Are you sure you want to delete this video?", color: Colors.white70, fontsize: 12),
+                                actions: [
+                                  TextButton(
+                                      onPressed: () => Navigator.of(ctx).pop(false),
+                                      child: UiHelper.CustomText(text: "Cancel", color: Colors.white54, fontsize: 14)
+                                  ),
+                                  TextButton(
+                                      onPressed: () => Navigator.of(ctx).pop(true),
+                                      child: UiHelper.CustomText(text: "Ok", color: Colors.red, fontsize: 14)
+                                  ),
+                                ],
+                              ),
+                            );
 
-                          if (shouldDelete == true) {
-                            final isarService = IsarService();
-                            try {
-                              await isarService.deleteVideoWithFile(id);
+                            if (shouldDelete == true) {
+                              final isarService = IsarService();
+                              try {
+                                await isarService.deleteVideoWithFile(id);
 
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5)
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(5)
+                                    ),
+                                    content: UiHelper.CustomText(
+                                      text: "Video Deleted Successfully",
+                                      color: Colors.white70,
+                                      fontsize: 12,
+                                    ),
+                                    backgroundColor: Color(0xFF4B4B4B),
+                                    behavior: SnackBarBehavior.floating,
+                                    duration: Duration(seconds: 2),
                                   ),
-                                  content: UiHelper.CustomText(
-                                    text: "Video Deleted Successfully",
-                                    color: Colors.white70,
-                                    fontsize: 12,
-                                  ),
-                                  backgroundColor: Color(0xFF4B4B4B),
-                                  behavior: SnackBarBehavior.floating,
-                                  duration: Duration(seconds: 2),
-                                ),
-                              );
+                                );
 
-                              onDelete();
-                            } catch (e) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(5)
+                                onDelete();
+                              } catch (e) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(5)
+                                    ),
+                                    content: UiHelper.CustomText(
+                                      text: "Error! Could not delete file",
+                                      color: Colors.white70,
+                                      fontsize: 12,
+                                    ),
+                                    backgroundColor: Color(0xFF4B4B4B),
+                                    behavior: SnackBarBehavior.floating,
+                                    duration: Duration(seconds: 2),
                                   ),
-                                  content: UiHelper.CustomText(
-                                    text: "Error! Could not delete file",
-                                    color: Colors.white70,
-                                    fontsize: 12,
-                                  ),
-                                  backgroundColor: Color(0xFF4B4B4B),
-                                  behavior: SnackBarBehavior.floating,
-                                  duration: Duration(seconds: 2),
-                                ),
-                              );
+                                );
+                              }
                             }
-                          }
+                          },
+                          child: UiHelper.CustomImage(img: "DeleteIcon.png"),
+                        )
+                      ],
+                    ),
+                    SizedBox(height: 7,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        UiHelper.CustomText(
+                          text: channel,
+                          color: Colors.white,
+                          fontsize: 10,
+                        ),
+                        UiHelper.CustomText(
+                          text: filePath.contains(".")
+                              ? filePath.substring(filePath.lastIndexOf(".") + 1).toUpperCase()
+                              : "",
+                          color: Color(0xFFDBDF60),
+                          fontfamily: "bold",
+                          fontsize: 9,
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 15),
+                    SizedBox(
+                      width:
+                      (MediaQuery.of(context).size.width * 0.95) / 1.9,
+                      height: 30,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          print(p.dirname(filePath));
+                          OpenFilex.open(p.dirname(filePath));
                         },
-                        child: UiHelper.CustomImage(img: "DeleteIcon.png"),
-                      )
-                    ],
-                  ),
-                  SizedBox(height: 7,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      UiHelper.CustomText(
-                        text: channel,
-                        color: Colors.white,
-                        fontsize: 10,
-                      ),
-                      UiHelper.CustomText(
-                        text: filePath.contains(".")
-                            ? filePath.substring(filePath.lastIndexOf(".") + 1).toUpperCase()
-                            : "",
-                        color: Color(0xFFDBDF60),
-                        fontfamily: "bold",
-                        fontsize: 9,
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 15),
-                  SizedBox(
-                    width:
-                    (MediaQuery.of(context).size.width * 0.95) / 1.9,
-                    height: 30,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        OpenFile.open(filePath);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0XFFDBDF5B),
-                        foregroundColor: Colors.black,
-                        padding: const EdgeInsets.all(4.0),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0XFFDBDF5B),
+                          foregroundColor: Colors.black,
+                          padding: const EdgeInsets.all(4.0),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        ),
+                        child: UiHelper.CustomText(
+                          text: "Go to location",
+                          color: Colors.black,
+                          fontsize: 10,
                         ),
                       ),
-                      child: UiHelper.CustomText(
-                        text: "Go to location",
-                        color: Colors.black,
-                        fontsize: 10,
-                      ),
-                    ),
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -664,11 +671,11 @@ class DownloadStreamsSheetState extends State<DownloadStreamsSheet> {
 
   @override
   Widget build(BuildContext context) {
-    // double? isDownloading = _downloadProgress.values.isNotEmpty
-    //     ? _downloadProgress.values.first
-    //     : null;
+    double? isDownloading = _downloadProgress.values.isNotEmpty
+        ? _downloadProgress.values.first
+        : null;
 
-    double isDownloading = -1;
+    // double isDownloading = -1;
 
     if (isDownloading == null) {
       return Container(
