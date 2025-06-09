@@ -1,4 +1,3 @@
-markdown
 # YT Save
 
 YT Save is a Flutter-based mobile app that allows users to search for YouTube videos, view available download streams (audio/video), and download them for offline viewing — all within a sleek and minimal UI.
