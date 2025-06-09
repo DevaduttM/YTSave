@@ -51,17 +51,34 @@ flutter run
 ## Screenshots
 
 **Home Screen**
+<div>
 <img src="assets/screenshots/HomeScreen.jpg" width="500" alt="Home Screen"/>
+</div>
+
 **Search Result Screen**
+<div>
 <img src="assets/screenshots/SearchResultScreen.jpg" width="500" alt="Search Result Screen"/>
+</div>
+
 **Download Options**
+<div>
 <img src="assets/screenshots/DownloadOptions.jpg" width="500" alt="Download Options"/>
+</div>
+
 **Downloading Video**
+<div>
 <img src="assets/screenshots/Downloading.jpg" width="500" alt="Downloading Video"/>
+</div>
+
 **Download Completed**
+<div>
 <img src="assets/screenshots/DownloadComplete.jpg" width="500" alt="Download Completed"/>
+</div>
+
 **Deleting Video**
+<div>
 <img src="assets/screenshots/DeleteVideo.jpg" width="500" alt="Deleting Video"/>
+</div>
 
 
 
