@@ -50,13 +50,20 @@ flutter run
 
 ## Screenshots
 
-markdown
-![Home Screen](assets/screenshots/HomeScreen.jpg)
-![Search Results](assets/screenshots/SearchResultScreen.jpg)
-![Download Options](assets/screenshots/DownloadOptions.jpg)
-![Downloading Video](assets/screenshots/Downloading.jpg)
-![Download Complete](assets/screenshots/DownloadComplete.jpg)
-![Deleting Video](assets/screenshots/DeleteVideo.jpg)
+**Home Screen**
+<img src="assets/screenshots/HomeScreen.jpg" width="500" alt="Home Screen"/>
+**Search Result Screen**
+<img src="assets/screenshots/SearchResultScreen.jpg" width="500" alt="Search Result Screen"/>
+**Download Options**
+<img src="assets/screenshots/DownloadOptions.jpg" width="500" alt="Download Options"/>
+**Downloading Video**
+<img src="assets/screenshots/Downloading.jpg" width="500" alt="Downloading Video"/>
+**Download Completed**
+<img src="assets/screenshots/DownloadComplete.jpg" width="500" alt="Download Completed"/>
+**Deleting Video**
+<img src="assets/screenshots/DeleteVideo.jpg" width="500" alt="Deleting Video"/>
+
+
 
 
 ---
